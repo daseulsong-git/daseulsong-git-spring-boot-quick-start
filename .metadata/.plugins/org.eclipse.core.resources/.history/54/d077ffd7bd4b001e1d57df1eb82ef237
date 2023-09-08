@@ -1,0 +1,6 @@
+# 테스트 데이터 설정
+author.name=TESTER
+author.age=49
+
+# 서버 포트 지정 (@SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT))
+server.port=8088

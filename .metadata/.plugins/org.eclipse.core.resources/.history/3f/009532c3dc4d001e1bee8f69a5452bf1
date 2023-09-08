@@ -1,0 +1,23 @@
+package com.rubypaper.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.rubypaper.domain.Board;
+import com.rubypaper.persistence.BoardRepository;
+
+@Service
+public class BoardServiceImpl {
+	
+	@Autowired
+	private BoardRepository boardRepository ;
+	
+	// 글 등록
+	public void insertBoard(Board board) {
+		boardRepository.save(board);
+	}
+	
+	// 글 수정
+	public 
+	
+}

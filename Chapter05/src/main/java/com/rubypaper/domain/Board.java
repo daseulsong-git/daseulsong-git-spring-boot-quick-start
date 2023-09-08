@@ -1,0 +1,41 @@
+package com.rubypaper.domain;
+
+import java.util.Date;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.TableGenerator;
+import lombok.Data;
+import lombok.ToString;
+
+@Data
+@Entity
+@ToString(exclude="user")
+public class Board {  
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int seq;
+	private String title;
+	//private String writer;
+	private String content;
+	private Date regDate;
+	private int cnt;
+	
+	//@ManyToOne의 기본 FetcType은 EAGER (=무조건 조인)
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(nullable = false)
+	private User user;
+}
+
+
+
+
+
+
+

@@ -1,0 +1,67 @@
+package com.rubypaper;
+
+import static org.mockito.Mockito.when;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+
+import com.rubypaper.service.BoardService;
+
+@SpringBootTest(webEnvironment = WebEnvironment.MOCK)
+@AutoConfigureMockMvc
+class BoardControllerTest4 {
+
+	//@MockMvc가 가짜 서블릿 컨테이너다.
+	@Autowired
+	private MockMvc mockMvc;
+	
+	@MockBean
+	private BoardService boardService;
+	
+	@Test
+	void testHello() throws Exception{
+		
+		// BoardService가 가진 hello 비즈니스 메소드가 리턴할 값을 설정한다.
+		when(boardService.hello("gurum")).thenReturn("hello : gurum");
+		
+		
+		// HTTP(http://localhost:8080/hello?name=gurum) 요청을 전송한다.
+		// 가짜 서블릿 컨테이너에 가짜로 요청을 함.
+		mockMvc.perform(MockMvcRequestBuilders.get("/hello").param("name","gurum"))
+		
+		//HTTP 응답 결과를 검증한다.
+		.andExpect(MockMvcResultMatchers.status().isOk()) // 200
+		.andExpect(MockMvcResultMatchers.content().string("hello : gurum"));
+	}
+	@Test
+	void testGetBoard() throws Exception{
+			
+			Map<String, Object> board = new HashMap<String, Object>();
+			board.put("SEQ", 1);
+			board.put("TITLE", "임시 제목");
+			board.put("WRITER", "테스터");
+			board.put("CONTENT", "임시 내용");
+			when(boardService.getBoard(1)).thenReturn(board);
+			
+			
+			// HTTP(http://localhost:8080/hello?name=gurum) 요청을 전송한다.
+			// 가짜 서블릿 컨테이너에 가짜로 요청을 함.
+			mockMvc.perform(get("/hello").param("name","gurum"))
+			
+			//HTTP 응답 결과를 검증한다.
+			.andExpect(MockMvcResultMatchers.status().isOk()) // 200
+			.andExpect(MockMvcResultMatchers.content().string("hello : gurum"));
+		}
+
+}

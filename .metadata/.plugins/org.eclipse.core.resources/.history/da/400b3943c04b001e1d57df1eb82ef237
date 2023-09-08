@@ -1,0 +1,14 @@
+package com.rubypaper.service;
+
+import org.springframework.stereotype.Service;
+
+@Service
+public class BoardService {
+	
+	@Autowired
+	private BoardDAO boardDAO;
+	
+	public String hello(String name) {
+		return "hello : "+name;
+	}
+}

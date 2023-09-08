@@ -1,0 +1,8 @@
+package com.rubypaper;
+
+
+@SpringBootTest
+public class PropertiesTest {
+	
+	
+}

@@ -1,0 +1,26 @@
+package com.rubypaper;
+
+import org.junit.Test;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.test.context.SpringBootTest;
+
+
+//@Controller, @Service, @Repositor가 붙은 모든 객체를 메모리에 올린다. (ComponentScan)
+//AutoConfiguration 클래스를 로딩하여 테스트에 필요한 기타 객체들만 메모리에 올린다. (Auto
+@SpringBootTest 
+public class PropertiesTest {
+	
+	// 외부에 설정한 테스트 데이터를 가져온다.
+	@Value("${author.name}")
+	private String name;
+	
+	@Value("${author.age}")
+	private String age;
+	
+	@Test
+	public void testMethod() {
+		System.out.println("이름 : "+name);
+		System.out.println("나이 : "+age);
+	}
+	
+}

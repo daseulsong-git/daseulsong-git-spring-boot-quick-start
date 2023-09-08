@@ -1,0 +1,7 @@
+package com.rubypaper.service;
+
+public class BoardService {
+	public BoardService() {
+		System.out.println("===> BoardController 생성");
+	}
+}

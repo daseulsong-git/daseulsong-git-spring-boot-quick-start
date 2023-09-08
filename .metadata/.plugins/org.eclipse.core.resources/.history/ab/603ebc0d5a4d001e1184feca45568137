@@ -1,0 +1,54 @@
+package com.rubypaper.persistence;
+
+import java.util.List;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
+
+import com.rubypaper.domain.Board;
+
+
+@Repository
+public interface BoardRepository extends JpaRepository<Board, Integer> {
+	
+	//쿼리 메소드를 사용해서 -> JPQL을 만드는 방법 (METHOD -> JPQL -> SQL)
+	//select b from Board b where b.title = :searchKeyword
+//	List<Board> findBoardByTitle(String searchKeyword);
+//	List<Board> findByTitle(String searchKeyword);
+//	List<Board> findByTitleContaining(String searchKeyword);
+//	List<Board> findByTitleContainingOrContentContaining(String title, String content);
+//	List<Board> findByTitleContainingOrderBySeqDesc(String searchKeyword);
+	
+	//Pageable (org.springframework.data.domain.Pageable) 쿼리 메소드를 사용한 paging
+	
+	//List<Board> findByTitleContaining(String searchKeyword, Pageable pagable);
+	
+	//Page<Board> findByTitleContaining(String searchKeyword, Pageable pagable);
+	
+	
+	// JPQL 직접 작성해서 실습 1 (JPQL ->SQL)
+	@Query("SELECT b FROM Board b WHERE b.title like %:keyword% ORDER BY b.seq DESC")
+	List<Board> getBoardList(@Param("keyword") String searchKeyword);
+	
+	// JPQL 직접 작성해서 실습 2
+	// select 할 변수가 여러 개일 경우 List<Object[]>로 받아야 한다.
+	@Query("SELECT b.seq, b.title, b.regDate FROM Board b WHERE b.title like %:keyword% ORDER BY b.seq DESC")
+	List<Object[]> getBoardList(@Param("keyword") String searchKeyword);
+	
+	@Query("SELECT b FROM Board b")
+	List<Board> getBoardList(Pageable pageable);
+	
+	
+	
+	
+	//native query를 사용 (JPQL X) (SQL)
+//	@Query(value = "SELECT SEQ, TITLE, REG_DATE FROM BOARD WHERE TITLE LIKE '%'||:keyword||'%' ORDER BY SEQ DESC", nativeQuery = true)
+//	List<Object[]> getBoardList(@Param("keyword") String searchKeyword);
+	
+}
+
+

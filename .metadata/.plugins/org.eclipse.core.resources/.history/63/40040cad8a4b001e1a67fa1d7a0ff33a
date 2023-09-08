@@ -1,0 +1,6 @@
+package com.rubypaper.config;
+
+@Data
+public class BoardAutoConfiguration {
+
+}

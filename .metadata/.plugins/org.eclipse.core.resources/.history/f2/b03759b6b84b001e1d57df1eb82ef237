@@ -1,0 +1,17 @@
+package com.rubypaper;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.context.SpringBootTest;
+
+@WebMvcTest
+//@Controller , @RestController만 메모리에 띄운다.
+//가짜 서블릿 컨테이너를 모킹한다.
+class BoardControllerTest1 {
+
+	//@MockMvc가 가짜 서블릿 컨테이너다.
+	@Test
+	void contextLoads() {
+	}
+
+}

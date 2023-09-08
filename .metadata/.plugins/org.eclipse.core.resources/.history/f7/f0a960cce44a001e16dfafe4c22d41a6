@@ -1,0 +1,18 @@
+
+package com.rubypaper.tv;
+ 
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import
+ org.springframework.context.annotation.Configuration;
+  
+  @Configuration // XML 파일을 대체하는 환경 설정 클래스 
+  public class TVConfiguration {
+  
+  @Bean // <bean> 설정을 대체한다.
+  TV tv() { return new SamsungTV(); }
+ 
+ @Bean Speaker speaker() { 
+	 return new AppleSpeaker(); 
+	 } 
+ }

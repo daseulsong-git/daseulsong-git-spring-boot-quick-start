@@ -1,0 +1,15 @@
+package com.rubypaper.jdbc;
+
+import lombok.Data;
+
+@Data
+public class ConnectionManager {
+	private String driverClass;
+	private String url;
+	private String username;
+	private S;tring password;
+	
+	public ConnectionManager() {
+		System.out.println("===> ConnectionManager 생성")
+	}
+}

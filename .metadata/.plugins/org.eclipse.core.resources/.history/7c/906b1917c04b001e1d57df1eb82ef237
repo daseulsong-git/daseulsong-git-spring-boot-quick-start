@@ -1,0 +1,30 @@
+package com.rubypaper.persistence;
+
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
+
+
+@Repository
+public class BoardDAO {
+	
+	private String BOARD_INSERT = "INSERT INTO BOARD(SEQ, TITLE, WRITER, CONTENT) VALUES ((SELECT MAX(SEQ)+1 FROM BOARD),?,?,?)";
+	private String BOARD_LIST = "SELECT * FROM BOARD ORDER BY SEQ DESC";
+	
+	@Autowired //JdbcTemplate 객체는 스프링 부트가 제공하는 AutoConfiguration에 의해 메모리에 뜬다. +의존성 주입
+	private JdbcTemplate spring;
+	
+	//글 등록
+	public void insertBoard(Map<String,Object> board) {
+		spring.update(BOARD_INSERT,board.get("TITLE"),board.get("WRITER"),board.get("CONTENT"));
+	}
+	
+	//글 목록
+	public List<Map<String, Object>> getBoardList(){
+		return spring.queryForList(BOARD_LIST);
+	}
+	
+}

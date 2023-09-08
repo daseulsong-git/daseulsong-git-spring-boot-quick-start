@@ -1,0 +1,45 @@
+package com.rubypaper.controller;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.rubypaper.domain.Board;
+
+@Controller
+public class BoardController {
+
+	@GetMapping("/getBoardList")
+	public String getBoardList(Model model) {
+		List<Board> boardList = new ArrayList<Board>();
+		for (int i = 1; i <= 5; i++) {
+			Board board = new Board();
+			board.setSeq(i);
+			board.setTitle("JSP 글 목록 : " + i);
+			board.setWriter("채규태");
+			board.setContent("JSP로 화면 구성합니다.");
+			board.setRegDate(new Date());
+			board.setCnt(0);
+			boardList.add(board);
+		}
+		// Model 객체에 검색 결과를 등록해야 JSP화면에서 사용할 수 있다. 
+		model.addAttribute("boardList", boardList);
+		
+		// Controller가 문자열을 리턴하면 ViewResovler가 접두사, 접미사를 붙여준다. 
+		return "getBoardList";
+	}
+}
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,32 @@
+package com.rubypaper;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
+import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+
+// Controller 뿐만 아니라 Service, Repository도 모두 생성해라
+// Random_port로 Tomcat 서버를 구동해라
+@SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT)
+class BoardControllerTest3 {
+
+	//TestRestTemplate 객체는 웹 브라우저와 동일한 기능을 제공한다.
+	@Autowired
+	private TestRestTemplate testTemplate;
+	
+	@Test
+	void contextLoads() {
+		String result = restTemplate.getForObject("/hello?name=gurum",String.class);
+		assertEquals("hello : gruum", null);
+	}
+}

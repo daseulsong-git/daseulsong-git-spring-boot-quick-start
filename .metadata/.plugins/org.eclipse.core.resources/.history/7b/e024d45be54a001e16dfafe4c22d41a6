@@ -1,0 +1,3 @@
+# 웹 어플리케이션 타입 설정
+spring.main.web-application-type=SERVLET
+

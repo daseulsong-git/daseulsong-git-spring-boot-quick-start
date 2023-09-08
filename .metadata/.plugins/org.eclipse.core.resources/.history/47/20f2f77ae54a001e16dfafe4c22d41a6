@@ -1,0 +1,5 @@
+My Banner 
+
+${spring-boot.formatted-version}
+# 베너 설정
+spring.main.banner-mode=console

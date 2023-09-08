@@ -1,0 +1,8 @@
+package com.rubypaper.service;
+
+public class BoardService {
+	
+	public BoardService() {
+		System.out.println("===> BoardService 생성");
+	}
+}

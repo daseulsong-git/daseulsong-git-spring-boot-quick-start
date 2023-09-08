@@ -1,0 +1,19 @@
+# 테스트 데이터 설정
+author.name=TESTER
+author.age=49
+
+# 서버 포트 지정 (@SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT)) 에서 사용
+server.port=8080
+
+#DataSource 설정
+spring.datasource.hikari.driver-clss-name=org.h2.Driver
+spring.datasource.hikari.jdbc-url=jdbc:h2:tcp://localhost/~/test
+spring.datasource.hikari.username=sa
+spring.datasource.hikari.password=
+
+#애플리케이션 타입 설정 (단순히 로그만 테스트할 때 지정)
+spring.main.web-application-type=none
+
+#로깅 설정
+logging.level.com.rubypaper=trace
+logging.file.name=src/main/resouces/log/board_log.log

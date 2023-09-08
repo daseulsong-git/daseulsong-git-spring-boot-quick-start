@@ -1,0 +1,3 @@
+# ViewResolver 설정
+spring.mvc.view.prefix=/WEB-INF/board/
+spring.mvc.view.suffix=.jsp

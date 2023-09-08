@@ -1,0 +1,172 @@
+package com.rubypaper;
+
+import java.util.Arrays;
+import java.util.Date;
+import java.util.List;
+import java.util.Optional;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+
+import com.querydsl.core.BooleanBuilder;
+import com.rubypaper.domain.Board;
+import com.rubypaper.domain.QBoard;
+import com.rubypaper.persistence.BoardRepository;
+import com.rubypaper.persistence.BoardRepositoryQueryDSL;
+
+@SpringBootTest
+class QueryMethodTest {
+
+	
+	@Autowired
+	private BoardRepository boardRepository;
+	
+	@Autowired
+	private BoardRepositoryQueryDSL boardRepositoryQueryDSL;
+	
+	@Test
+	void testDynamicQuery() {
+		
+		BooleanBuilder builder = new BooleanBuilder();
+		
+		String condition = "TITLE"; //검색 조건
+		String keyword = "10"; //검색 키워드
+		QBoard qboard = QBoard.board;
+		if(condition.equals("TITLE")) {
+			builder.and(qboard.title.like("%"+keyword+"%"));
+		}else if(condition.equals("CONTENT")) {
+			builder.and(qboard.content.like("%"+keyword+"%"));
+		}
+		
+		Pageable pageable = PageRequest.of(0, 5);
+		
+		Iterable<Board> boardList = boardRepositoryQueryDSL.findAll(builder);
+		
+		System.out.println("검색 결과");
+		for(Board board : boardList) {
+			System.out.println("--->"+board.toString());
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+	
+	// JPQL을 사용한 테스트
+	@Test
+	void testQueryAnnotation() {
+		//List<Board> boardList = boardRepository.getBoardList("테스트 제목 10");
+//		System.out.println("검색 결과");
+//		for (Board board : boardList) {
+//			System.out.println("===>"+board.toString());
+//		}
+		
+		
+//		List<Object[]> boardList = boardRepository.getBoardList("테스트 제목 10");
+//		
+//		System.out.println("검색 결과");
+//		for (Object[] board : boardList) {
+//			System.out.println("===>"+Arrays.toString(board));
+//		}
+
+//		Pageable pageable = PageRequest.of(0, 3, Sort.Direction.DESC,"seq");
+//		List<Board> boardList = boardRepository.getBoardList(pageable);
+//		
+//		System.out.println("검색 결과");
+//		for (Board board : boardList) {
+//			System.out.println("===>"+board.toString());
+//		}
+		
+	}
+	
+	//@Test
+	//void testQueryMethod() {
+//		List<Board> boardList = boardRepository.findByTitleContainingOrderBySeqDesc("17"); 
+//		List<Board> boardList = boardRepository.findByTitleContaining("17"); 
+//		List<Board> boardList = boardRepository.findByTitle("테스트 제목 17"); 
+	//	List<Board> boardList = boardRepository.findBoardByTitle("테스트 제목 17");
+		
+//		System.out.println("검색 결과");
+//		for(Board board : boardList) {
+//			System.out.println("---> "+board.toString());
+//		}
+		
+		
+	//}
+	
+	//@Test
+	void testQueryMethod() {
+		
+		// 첫 번재 페이지(0)에 해당하는 5건의 데이터만 가져와라.
+		//Pageable pageable = PageRequest.of(0, 5);
+		
+		//이렇게 pageable이 정렬을 진행해주기도 한다.
+		Pageable pageable = PageRequest.of(0, 5, Sort.Direction.DESC, "Seq");
+		
+//		List<Board> boardList = boardRepository.findByTitleContaining("17",pageable); 
+//		
+//		System.out.println("검색 결과");
+//		for(Board board : boardList) {
+//			System.out.println("---> "+board.toString());
+//		}
+		
+		
+		
+		
+		
+		
+		
+		
+		//Page<T> 사용하여 다건 paging (쿼리 메소드 사용)
+		
+		Page<Board> pageInfo = boardRepository.findByTitleContaining("17",pageable); 
+		
+		System.err.println("검색된 전체 데이터 수 : "+ pageInfo.getTotalElements());
+		System.out.println("전체 페이지 수 : "+ pageInfo.getTotalPages());
+		System.out.println("페이지 당 출력할 데이터 : "+pageInfo.getSize());
+		System.out.println("검색 결과");
+		for(Board board : pageInfo.getContent()) {
+			System.out.println("---> "+board.toString());
+		}
+		
+		if(pageInfo.hasPrevious()) {
+			System.out.println("이전 페이지 정보 : "+ pageInfo.previousPageable());
+		}
+		System.out.println("현재 페이지 정보 : "+pageInfo.getPageable());
+		if(pageInfo.hasNext()) {
+			System.out.println("다음 페이지 정보 : "+ pageInfo.nextPageable());
+		}
+		
+	}
+	
+	//@BeforeEach
+	void tsetInsertBoard() {
+		for(int i=1; i<=200; i++) {
+			Board board = new Board();
+			board.setTitle("테스트 제목 "+i);
+			board.setWriter("테스터");
+			board.setContent("테스트 내용 : "+i);
+			board.setRegDate(new Date());
+			board.setCnt(0);
+			boardRepository.save(board);
+		}
+	}
+	
+
+
+}
+
+
+

@@ -1,0 +1,15 @@
+package com.rubypaper;
+
+import org.junit.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+
+@SpringBootTest 
+//@Controller, @Service, @Repositor가 붙은 모든 객체를 메모리에 올린다. (ComponentScan)
+//AutoConfiguration 클래스를 로딩하여 테스트에 필요한 기타 객체들만 메모리에 올린다. (Auto
+public class PropertiesTest {
+	@Test
+	public void testMethod() {
+		
+	}
+	
+}

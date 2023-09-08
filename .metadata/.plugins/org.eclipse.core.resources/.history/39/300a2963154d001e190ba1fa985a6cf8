@@ -1,0 +1,33 @@
+package com.rubypaper;
+
+import java.util.Date;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+
+import com.rubypaper.domain.Board;
+import com.rubypaper.persistence.BoardRepository;
+
+@SpringBootTest
+class BoardRepositoryTest1 {
+
+	
+	@Autowired
+	private BoardRepository boardRepository;
+	
+	@Test
+	void tsetInsertBoard() {
+		Board board = new Board();
+		board.setTitle("Data JPA 테스트");
+		board.setWriter("테스터");
+		board.setContent("Data JPA 테스트중입니다.");
+		board.setRegDate(new Date());
+		board.setCnt(0);
+		boardRepository.save(board);
+	}
+
+}
+
+
+

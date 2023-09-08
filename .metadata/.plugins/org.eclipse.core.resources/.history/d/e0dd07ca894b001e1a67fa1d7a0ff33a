@@ -1,0 +1,6 @@
+package com.rubypaper.jdbc;
+
+@Data
+public class ConnectionManager {
+
+}

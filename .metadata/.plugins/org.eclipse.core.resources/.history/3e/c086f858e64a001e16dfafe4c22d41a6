@@ -1,0 +1,6 @@
+# 웹 어플리케이션 타입 설정
+spring.main.web-application-type=SERVLET
+
+# 베너 설정
+spring.main.banner-mode=console
+spring.banner.location=banner/banner.txt
