@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "HTTP://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+	<settings>
+		<setting name="cacheEnabled" value="false" />
+		<setting name="useGeneratedKeys" value="true" />
+		<setting name="defaultExecutorType" value="REUSE" />
+	</settings>
+	
+	<typeAliases>
+		<typeAlias alias="code" type="com.multicampus.biz.code.CodeVO"/>
+		<typeAlias alias="deliveryCompany" type="com.multicampus.biz.purchase.DeliveryCompanyVO"/>
+		<typeAlias alias="purchase" type="com.multicampus.biz.purchase.PurchaseVO"/>
+		<typeAlias alias="category" type="com.multicampus.biz.sale.CategoryVO"/>
+		<typeAlias alias="product" type="com.multicampus.biz.sale.ProductVO"/>
+		<typeAlias alias="sale" type="com.multicampus.biz.sale.SaleVO"/>
+		<typeAlias alias="user" type="com.multicampus.biz.user.UserVO"/>
+		<typeAlias alias="search" type="com.multicampus.biz.common.SearchVO"/>
+	</typeAliases>
+	
+	<mappers>		 
+		<mapper resource="mappers/code/code-mapping.xml" />
+		<mapper resource="mappers/user/user-mapping.xml" />
+		<mapper resource="mappers/sale/product-mapping.xml" />		
+		<mapper resource="mappers/sale/category-mapping.xml" />		
+		<mapper resource="mappers/sale/sale-mapping.xml" />
+		<mapper resource="mappers/purchase/purchase-mapping.xml" />
+		<mapper resource="mappers/purchase/deliverycompany-mapping.xml" />
+	</mappers>
+</configuration>
