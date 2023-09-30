@@ -9,7 +9,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class CodeDAO {
 	
-	// Git Test22222
 	@Autowired
 	private SqlSessionTemplate mybatis;
 	
